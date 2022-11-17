@@ -1,0 +1,28 @@
+﻿@model DeliveryApp.Models.EmailInfo
+
+@{
+    ViewData["Title"] = "Contato";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Entre em contato com o desenvolvedor!</p>
+
+<div class="d-flex justify-content-center align-items-center">
+
+    <a class="nav-link" style="color: blue" href="https://github.com/iyeskett" target="_blank">GitHub</a>
+    <a class="nav-link" style="color: blue" href="https://wa.me/5511995478831" target="_blank">Whatsapp</a>
+    <a class="nav-link" style="color: blue" href="mailto:felipesilva.mello@hotmail.com" target="_blank">Email</a>
+</div>
+
+@using (Html.BeginForm("SendMail", "Home", FormMethod.Post))
+{
+    <label asp-for="Mail" class="control-label"></label>
+    <input asp-for="Mail" class="form-control" required />
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" required />
+    <button type="submit" class="btn btn-outline-primary mt-3">Entrar em contato</button>
+}
+
+
+

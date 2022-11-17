@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DeliveryApp.Models.Product>
+
+@{
+    ViewData["Title"] = "AppAdmin - Produto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<a class="text-white btn btn-dark w-25 p-1" asp-action="New">Novo Produto</a>
+
+<table class="table table-striped table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.Details)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.Price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.Image)
+                </td>
+
+                <td>
+                    <a style="text-decoration:none; color: #FF6000; font-weight: bold;" asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+                    <a style="text-decoration:none; color: #2d2d2d; font-weight: bold;" asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a> |
+                    <a style="text-decoration:none; color: #ed2e38; font-weight: bold;" asp-action="Deletar" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

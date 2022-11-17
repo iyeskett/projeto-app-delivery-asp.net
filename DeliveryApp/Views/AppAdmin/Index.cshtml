@@ -1,0 +1,59 @@
+﻿
+
+@{
+    ViewData["Title"] = "AppAdmin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<!-- Button trigger modal -->
+
+<a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalUsuarios">
+    Gerenciar Usuários
+</a>
+
+
+<!-- Modal Gerenciamento de usuarios -->
+<div class="modal fade" id="modalUsuarios" tabindex="-1" aria-labelledby="modalUsuariosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Gerenciar Usuários</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a class="btn btn-outline-dark" asp-action="Index" asp-controller="GerenciadorUsuarios">Gerenciar usuários</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal -->
+
+<a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Gerenciamento do Site
+</a>
+
+
+<!-- Modal Gerenciamento do site -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Gerenciamento do Site</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <a class="btn btn-outline-dark" asp-controller="Product" asp-action="Index">Produtos</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<DeliveryApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Carrinho";
+    List<int> productsInCart = new List<int>();
+    double totalProducts = 0;
+    double fee = 5.5;
+
+}
+
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+
+                <div class="cart-table clearfix">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table">
+                                <th class="fs-1 d-flex justify-content-between align-items-center">
+                                    <p>Produtos no carrinho</p>
+
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalClearCart">
+                                        Limpar Carrinho
+                                    </button>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (!productsInCart.Contains(item.Id))
+                                {
+                                    <tr class="table">
+                                        <td class="d-flex justify-content-between align-items-center">
+                                            <div class="fw-bold">
+                                                <img src="@item.Image" class="img-thumbnail" style="height:50px;width:50px;" alt="...">
+                                                @Html.DisplayFor(model => item.Name)
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center ">
+
+                                                @using (Html.BeginForm("RemoveToCartFromCart", "Home", new { @idProduct = item.Id }, FormMethod.Post))
+                                                {
+                                                    <button type="submit" class="btn btn-outline-secondary">-</button>
+                                                }
+
+                                                @using (Html.BeginForm("AddToCartFromCart", "Home", new { @idProduct = item.Id }, FormMethod.Post))
+                                                {
+                                                    <button type="submit" class="btn btn-outline-secondary ">+</button>
+                                                }
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="table">
+                                        <td class="d-flex justify-content-between">
+                                            <p class="text-start">Quantidade: @Html.DisplayFor(model => item.QuantityInCart)</p>
+                                            <p class="text-end">Preço: @Html.DisplayFor(model => item.Price)</p>
+                                        </td>
+                                    </tr>
+
+                                    productsInCart.Add(item.Id);
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        totalProducts += item.Price * item.QuantityInCart;
+                    }
+                    <li><span>Subtotal:</span> <span>@totalProducts.ToString("F2")</span></li>
+
+                    <li><span>Taxa de Entrega:</span> <span>@fee</span></li>
+                    <li><span class="fw-bold">Total:</span> @((totalProducts + fee).ToString("F2"))<span></span></li>
+                </ul>
+                <div class="btn btn-primary">
+                    <a class="btn btn-primary w-100 ">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@**********************MODALS********************@
+
+@*Modal Clear Cart*@
+<div class="modal fade" id="modalClearCart" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Limpar Carrinho</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja limpar o carrinho?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                @using (Html.BeginForm("ClearCart", "Home", FormMethod.Post))
+                {
+                    <button type="submit" class="btn btn-primary ">Confirmar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

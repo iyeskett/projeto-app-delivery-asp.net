@@ -1,0 +1,34 @@
+﻿@model DeliveryApp.Models.UserLogin
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<form asp-controller="Login" asp-action="Login" method="post">
+<div class="tela-login">
+    <h1>Login Painel</h1>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" value="admin@admin" class="form-control" />
+            <div id="liveAlertPlaceholder">@Html.ValidationMessageFor(x => x.Email)</div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" type="password" value="admin" class="form-control" />
+            <div id="liveAlertPlaceholder">@Html.ValidationMessageFor(x => x.Password)</div>
+         
+    </div>
+    <div class="form-group mt-5">
+        <input type="submit" value="Acessar Painel" class="btn btn-primary" />
+    </div>
+</div>
+    
+</form>

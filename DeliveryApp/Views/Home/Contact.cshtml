@@ -1,0 +1,20 @@
+﻿@model DeliveryApp.Models.EmailInfo
+
+@{
+    ViewData["Title"] = "Contato";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Fale conosco!</p>
+
+@using (Html.BeginForm("SendMail", "Home", FormMethod.Post))
+{
+    <label asp-for="Mail" class="control-label"></label>
+    <input asp-for="Mail" class="form-control" required />
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" required />
+    <button type="submit" class="btn btn-outline-primary mt-3">Entrar em contato</button>
+}
+
+
+
