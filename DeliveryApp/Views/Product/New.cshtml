@@ -12,8 +12,9 @@
 <div class="row">
 
     <div class="col-md-4">
-        <form asp-action="New">
+        <form method="post" enctype="multipart/form-data" asp-action="Import">
             <div class="form-group">
+
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" id="Name" />
 
@@ -54,9 +55,21 @@
 
 
             <br />
-            <div class="form-group">
-                <input type="submit" value="Novo" class="btn btn-primary" />
-            </div>
+            <input type="file" class="form-control form-control-sm mt-1" name="arquivos" id="img-input" accept="image/*">
+
+            <picture>
+                <img src="" class="img-fluid img-thumbnail" id="preview">
+            </picture>
+
+            <button class="btn btn-outline-secondary mb-1" type="submit" asp-action="Import">Salvar</button>
+
+            @if (TempData["ErroMessageNew"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+                    @TempData["ErroMessageNew"]
+                </div>
+            }
 
         </form>
 

@@ -3,17 +3,17 @@
 @{
     ViewData["Title"] = "Contato";
 }
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-white">@ViewData["Title"]</h1>
 
-<p>Fale conosco!</p>
+<p class="text-white">Fale conosco!</p>
 
 @using (Html.BeginForm("SendMail", "Home", FormMethod.Post))
 {
-    <label asp-for="Mail" class="control-label"></label>
+    <label asp-for="Mail" class="control-label text-white"></label>
     <input asp-for="Mail" class="form-control" required />
-    <label asp-for="Name" class="control-label"></label>
+    <label asp-for="Name" class="control-label text-white"></label>
     <input asp-for="Name" class="form-control" required />
-    <button type="submit" class="btn btn-outline-primary mt-3">Entrar em contato</button>
+    <button type="submit" class="btn btn-primary mt-3">Entrar em contato</button>
 }
 
 

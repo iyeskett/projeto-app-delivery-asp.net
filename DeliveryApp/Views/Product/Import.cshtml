@@ -9,6 +9,7 @@
     <form method="post" enctype="multipart/form-data" asp-action="Import">
 
         <div class="form-group">
+            <input type="hidden" asp-for="Id" />
             <label asp-for="Name" class="control-label"></label>
             <input asp-for="Name" class="form-control" readonly id="Name" />
 
@@ -47,15 +48,21 @@
         </div>
 
 
-        <input type="file" class="form-control form-control-sm" name="arquivos" id="img-input" accept="image/*">
+        <input type="file" class="form-control form-control-sm mt-1" name="arquivos" id="img-input" accept="image/*">
 
         <picture>
-            <img src="..." class="img-fluid img-thumbnail" id="preview"alt="...">
+            <img src="" class="img-fluid img-thumbnail" id="preview">
         </picture>
 
-        <button class="btn btn-outline-secondary" type="submit" asp-action="Import">Importar Imagem</button>
+        <button class="btn btn-outline-secondary" type="submit" asp-action="Import">Importar Imagem & Salvar</button>
+        @if (Model.Id > 0)
+        {
+            <button class="btn btn-outline-secondary" type="submit" asp-action="Save">Salvar</button>
+        }
 
-        
+
+
+
 
 
         @if (TempData["MensagemErro"] != null)

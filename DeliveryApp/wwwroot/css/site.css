@@ -14,7 +14,19 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.bodyHome {
+    background: linear-gradient(to right, #c04848, #480048);
+}
+ footer{
+     background: #ECECEC;
+ }
+
+.img-product {
+    height: 170px;
+    width: 140px
 }
 
 /* Login */

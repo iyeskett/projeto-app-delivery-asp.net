@@ -53,8 +53,36 @@ namespace DeliveryApp.Connections.Database
                     {
                         cmd.Parameters.AddWithValue("@Name", product.Name);
                         cmd.Parameters.AddWithValue("@Details", product.Details);
-                        cmd.Parameters.AddWithValue("@Price", product.Price);
+                        cmd.Parameters.AddWithValue("@Price", Math.Round(product.Price, 2));
                         cmd.Parameters.AddWithValue("@Image", product.Image);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            string sqlQuery = $"UPDATE products set name = @Name, details = @Details, price = @Price WHERE id = {product.Id}";
+
+            try
+            {
+                using (var cn = new MySqlConnection(Conn.strConn))
+                {
+                    cn.Open();
+
+                    using (var cmd = new MySqlCommand(sqlQuery, cn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", product.Name);
+                        cmd.Parameters.AddWithValue("@Details", product.Details);
+                        cmd.Parameters.AddWithValue("@Price", Math.Round(product.Price, 2));
+
 
                         cmd.ExecuteNonQuery();
                     }
@@ -129,6 +157,29 @@ namespace DeliveryApp.Connections.Database
                 throw;
             }
 
+        }
+
+        public void DeleteProduct(int id)
+        {
+            string sqlQuery = $"DELETE FROM products WHERE id = {id}";
+
+            try
+            {
+                using (var cn = new MySqlConnection(Conn.strConn))
+                {
+                    cn.Open();
+
+                    using (var cmd = new MySqlCommand(sqlQuery, cn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

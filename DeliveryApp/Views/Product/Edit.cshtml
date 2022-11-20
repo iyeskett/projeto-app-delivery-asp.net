@@ -1,5 +1,90 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DeliveryApp.Models.Product
 @{
+    ViewData["Title"] = "Novo Produto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
+<h1>Editar produto</h1>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Import">
+            <div class="form-group">
+
+               
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Image" />
+
+                <br />
+
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" id="Name" />
+
+                <div class="invalid-feedback">
+                    Digite o nome do produto
+                </div>
+
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" id="Details" />
+
+                <div class="invalid-feedback">
+                    Digite os detalhes do produto
+                </div>
+
+                @Html.ValidationMessageFor(x => x.Details)
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" id="Price" />
+                <div class="invalid-feedback">
+                    Requisitos: <br />
+                    <ul>
+                        <li>Valor maior que 0</li>
+                        <li>Valor não pode ser em branco</li>
+                        <li>Valor numérico</li>
+                    </ul>
+
+                </div>
+                @Html.ValidationMessageFor(x => x.Price)
+            </div>
+
+
+
+            <br />
+            <input type="file" class="form-control form-control-sm mt-1" name="arquivos" id="img-input" accept="image/*">
+
+            <picture>
+                <img src="@Model.Image" class="img-fluid img-thumbnail" id="preview">
+            </picture>
+
+            <button class="btn btn-outline-secondary mb-1" type="submit" asp-action="Import">Salvar</button>
+
+            @if (TempData["ErroMessage"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+                    @TempData["ErroMessage"]
+                </div>
+            }
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<br />
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>

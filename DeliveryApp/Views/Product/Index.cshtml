@@ -45,13 +45,13 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(model => item.Image)
+                    <img src="@item.Image" class="img-thumbnail" style="height:150px;width:150px;" />
                 </td>
 
                 <td>
-                    <a style="text-decoration:none; color: #FF6000; font-weight: bold;" asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
-                    <a style="text-decoration:none; color: #2d2d2d; font-weight: bold;" asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a> |
-                    <a style="text-decoration:none; color: #ed2e38; font-weight: bold;" asp-action="Deletar" asp-route-id="@item.Id">Deletar</a>
+                    <a style="text-decoration:none; color: #FF6000; font-weight: bold;" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a style="text-decoration:none; color: #2d2d2d; font-weight: bold;" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a style="text-decoration:none; color: #ed2e38; font-weight: bold;" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
                 </td>
             </tr>
         }

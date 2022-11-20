@@ -1,5 +1,42 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DeliveryApp.Models.Product
 @{
+    ViewData["Title"] = "Novo Produto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<h1 style="color: red">Deseja realmente deletar esse produto?</h1>
+
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(x => x.Name)
+        </dt>
+        <dt class="col-sm-10">
+            @Html.DisplayFor(x => x.Name)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(x => x.Details)
+        </dt>
+        <dt class="col-sm-10">
+            @Html.DisplayFor(x => x.Details)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(x => x.Price)
+        </dt>
+        <dt class="col-sm-10">
+            @Html.DisplayFor(x => x.Price)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(x => x.Image)
+        </dt>
+        <dt>
+            <img src="@Model.Image" class="img-thumbnail" style="height:150px;width:150px;" />
+        </dt>
+    </dl>
+</div>
+
+<form asp-action="Delete">
+    <input type="submit" value="Deletar" class="btn btn-danger" />
+</form>

@@ -2,14 +2,54 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    int num = 0;
+    string classTr;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bem Vindo</h1>
-    <p>Faça o seu pedido.</p>
+<div class="container py-5">
+    <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto">
+            <h1 class="display-4">Faça o seu pedido.</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- List group-->
+            <ul class="list-group shadow">
+                @foreach (var item in Model)
+                {
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">@item.Name</h5>
+                                <p class="font-italic text-muted mb-0 small">@item.Details</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">R$@item.Price</h6>
+                                </div>
+                            </div>
+                            <img src="@item.Image" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2 img-product mb-1">
+                            @using (Html.BeginForm("AddToCartFromHome", "Home", new { @idProduct = item.Id }, FormMethod.Post))
+                            {
+                                <button type="submit" class="btn text-light bg-primary">Adicionar ao carrinho</button>
+                            }
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                }
+                
+            </ul> <!-- End -->
+        </div>
+    </div>
 </div>
 
-<table class="table table-bordered">
+
+@*<div class="text-center">
+    <h1 class="display-4">Bem Vindo</h1>
+    <p>Faça o seu pedido.</p>
+</div>*@
+
+@*<table class="table table-bordered ">
     <thead>
         <tr class="table">
             <th class="fs-1">
@@ -21,31 +61,41 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="table">
+            @if (num % 2 == 0)
+            {
+                classTr = "table-active";
+            }
+            else
+            {
+                classTr = "";
+            }
+            <tr class="@classTr">
                 <td class="fw-bold d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-column">
-                        <img src="@item.Image" class="img-thumbnail" style="height:150px;width:150px;" alt="...">
+                        <img src="@item.Image" style="height:150px;width:150px;" alt="...">
                         @Html.DisplayFor(model => item.Name)
                     </div>
                     @using (Html.BeginForm("AddToCartFromHome", "Home", new { @idProduct = item.Id }, FormMethod.Post))
                     {
-                        <button type="submit" class="btn btn-outline-primary ">Adicionar ao carrinho</button>
+                        <button type="submit" class="btn text-light bg-primary">Adicionar ao carrinho</button>
                     }
                 </td>
             </tr>
-            <tr class="table">
+            <tr class="@classTr">
                 <td>
                     <p>
                         @Html.DisplayFor(model => item.Details)
                     </p>
                 </td>
             </tr>
-            <tr class="table">
-                <td class="text-end">
+            <tr class="@classTr">
+                <th class="text-end">
                     <a>Preço: @Html.DisplayFor(model => item.Price)</a>
-                </td>
+                </th>
             </tr>
+
+            @(num++)
 
         }
     </tbody>
-</table>
+</table>*@
