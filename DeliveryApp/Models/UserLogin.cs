@@ -19,7 +19,7 @@ namespace DeliveryApp.Models
         [Required(ErrorMessage = "Digite a senha")]
         [JsonProperty("senha")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "Digite o tipo de usuario")]
+        [Required(ErrorMessage = "Selecione o tipo de usuario")]
         [StringLength(50)]
         public string Type { get; set; }
     }
