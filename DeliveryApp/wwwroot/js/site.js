@@ -13,3 +13,6 @@ function readImage() {
     }
 }
 document.getElementById("img-input").addEventListener("change", readImage, false);
+
+const toastElList = document.querySelectorAll('.toast')
+const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))

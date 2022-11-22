@@ -7,14 +7,24 @@
 
 <p class="text-white">Fale conosco!</p>
 
-@using (Html.BeginForm("SendMail", "Home", FormMethod.Post))
-{
+<form asp-action="SendMail" data-ajax-mode="replace" data-ajax-update="#updateDiv" data-ajax-success="Success" data-ajax-failure="Failure" data-ajax="true">
+
     <label asp-for="Mail" class="control-label text-white"></label>
     <input asp-for="Mail" class="form-control" required />
+
     <label asp-for="Name" class="control-label text-white"></label>
     <input asp-for="Name" class="form-control" required />
+
     <button type="submit" class="btn btn-primary mt-3">Entrar em contato</button>
-}
 
+</form>
 
+<div id="updateDiv" class="text-white">
+</div>
 
+@section Scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+    }

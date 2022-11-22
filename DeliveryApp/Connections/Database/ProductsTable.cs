@@ -7,6 +7,38 @@ namespace DeliveryApp.Connections.Database
 {
     public class ProductsTable
     {
+        public async Task<List<Product>> GetProductsAsync()
+        {
+            DataTable dataTable;
+
+            string sqlQuery = "SELECT id, name, details, price, image FROM products";
+
+            try
+            {
+                using (var cn = new MySqlConnection(Conn.strConn))
+                {
+                    cn.Open();
+
+                    using (var da = new MySqlDataAdapter(sqlQuery, cn))
+                    {
+                        using (dataTable = new DataTable())
+                        {
+                            da.Fill(dataTable);
+                            var serialize = JsonConvert.SerializeObject(dataTable, Formatting.Indented);
+                            var products = JsonConvert.DeserializeObject<List<Product>>(serialize);
+                            return products;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public List<Product> GetProducts()
         {
             DataTable dataTable;

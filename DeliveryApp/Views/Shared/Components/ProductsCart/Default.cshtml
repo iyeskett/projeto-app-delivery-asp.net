@@ -1,0 +1,63 @@
+﻿@model DeliveryApp.Models.Product
+@{
+
+    List<int> productsInCart = new List<int>();
+}
+
+@if (!productsInCart.Contains(Model.Id))
+{
+    <tr class="table">
+
+        <td class="d-flex justify-content-between align-items-center">
+
+            <div class="fw-bold">
+
+                <img src="@Model.Image" class="img-thumbnail" style="height:50px;width:50px;" alt="...">
+                @Html.DisplayFor(model => Model.Name)
+
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center ">
+
+                <form asp-action="RemoveToCartFromCart" data-ajax-loading="#loading@(Model.Id)" data-ajax-mode="replace" data-ajax-update="#updateDiv@(Model.Id)" data-ajax-success="Success" data-ajax-failure="Failure" data-ajax="true">
+
+                    <input type="hidden" asp-for="Id" class="form-control" />
+
+                    <button type="submit" class="btn btn-primary mt-3">-</button>
+                    <span id="loading@(Model.Id)"> <i class="fas fa-spinner fa-spin"></i></span>
+
+                </form>
+
+                <form asp-action="AddToCartFromCart" data-ajax-loading="#loading@(Model.Id)" data-ajax-mode="replace" data-ajax-update="#updateDiv@(Model.Id)" data-ajax-success="Success" data-ajax-failure="Failure" data-ajax="true">
+
+                    <input type="hidden" asp-for="Id" class="form-control" />
+
+                    <button type="submit" class="btn btn-primary mt-3">+</button>
+                    <span id="loading@(Model.Id)"> <i class="fas fa-spinner fa-spin"></i></span>
+
+                </form>
+
+                @using (Html.BeginForm("AddToCartFromCart", "Home", new { @idProduct = Model.Id }, FormMethod.Post))
+                {
+                    <button type="submit" class="btn btn-outline-secondary ">+</button>
+                }
+
+            </div>
+
+        </td>
+
+    </tr>
+
+    <tr class="table">
+
+        <td class="d-flex justify-content-between">
+
+            <p class="text-start">Quantidade: @Html.DisplayFor(model => Model.QuantityInCart)</p>
+            <p class="text-end">Preço: @Html.DisplayFor(model => Model.Price)</p>
+
+        </td>
+
+    </tr>
+
+    productsInCart.Add(Model.Id);
+}
